@@ -22,7 +22,7 @@ int Log_in() {
    char choice;
    struct User user;
    FILE *fp;
-   int loggedIn = 0;
+   int loggedIn = 0,age;
    while (1) {
       printf("Enter L to login, R to register, or Q to quit: ");
       scanf(" %c", &choice);
@@ -75,30 +75,39 @@ int Log_in() {
          fclose(fp);
       } 
       else if (choice == 'R' || choice == 'r') {
-         char username[50], password[50];
-         printf("Enter username: ");
-         scanf("%s", username);
-         printf("Enter password: ");
-         scanf("%s", password);
+        printf("Enter your year of birth");
+        scanf("%d",age);
+        if(age>2005){
+            char username[50], password[50];
+            printf("Enter username: ");
+            scanf("%s", username);
+            printf("Enter password: ");
+            scanf("%s", password);
 
-         fp = fopen("users.txt", "a");
-         strcpy(user.username, username);
-         strcpy(user.password, password);
-         fwrite(&user, sizeof(struct User), 1, fp);
-         fclose(fp);
+            fp = fopen("users.txt", "a");
+            strcpy(user.username, username);
+            strcpy(user.password, password);
+            fwrite(&user, sizeof(struct User), 1, fp);
+            fclose(fp);
 
-         printf("Registration successful!\n");
-        //  login();
-         
-      } else if (choice == 'Q' || choice == 'q') {
-         break;
-      } else {
-         printf("Invalid choice. Please try again.\n");
-         break;
+            printf("Registration successful!\n");
+            //  login();
+        }
+         else{
+            printf("You are not eligible to vote");
+        }    
+    } else if (choice == 'Q' || choice == 'q') {
+            break;
+    } else {
+        printf("Invalid choice. Please try again.\n");
+        break;
+    }
+       
       }
+      return 0;
    }
-   return 0;
-}
+   
+
 
 int Vote_posi() {
    int option;
